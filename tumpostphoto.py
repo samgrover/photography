@@ -112,8 +112,16 @@ if __name__ == "__main__":
     # Process all tags
     tags.extend(street_tags)
     tags.extend(camera_tags)
-    common_tags = ['Photographers on Tumblr', 'Original Photographers']
-    tags.extend(common_tags)
+    
+    # Create Instagram/Ello tags
+    instagram_tags = []
+    for a_tag in tags:
+        transformed_tag = ''.join(t.capitalize() for t in a_tag.split(' '))
+        instagram_tags.append('#' + transformed_tag)
+    
+    # Add tumblr specific tags
+    tumblr_tags = ['Photographers on Tumblr', 'Original Photographers']
+    tags.extend(tumblr_tags)
     
     # Ask for caption
     caption = raw_input('\nEnter caption:\n')
@@ -122,6 +130,7 @@ if __name__ == "__main__":
     
     print
     print 'Final tags are:\n' + ', '.join(tags)
+    print 'Instagram tags are:\n' + ', '.join(instagram_tags)
     print 'Full caption is:\n' + caption.lstrip().rstrip()
     
     # Upload confirmation
