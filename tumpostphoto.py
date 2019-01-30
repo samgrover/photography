@@ -17,7 +17,7 @@ import pytumblr
 
 # Utils
 def printjson(json_string):
-    print json.dumps(json_string, indent=4)
+    print(json.dumps(json_string, indent=4))
 
 # Date formatting functions from:
 # http://stackoverflow.com/questions/5891555/display-the-date-like-may-5th-using-pythons-strftime
@@ -30,7 +30,7 @@ def custom_strftime(format, t):
 # Main
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        print "This script requires at least one filename argument."
+        print("This script requires at least one filename argument.")
         exit(0)
     
     parser = SafeConfigParser()
@@ -47,10 +47,10 @@ if __name__ == "__main__":
     # Authenticate via OAuth
     client = pytumblr.TumblrRestClient(consumer_key, consumer_secret, oauth_token, oauth_secret)
     
-    print 'Processing files:'
+    print('Processing files:')
     filenames = sys.argv[1:]
     for a_filename in filenames:
-        print '    ' + a_filename
+        print('    ' + a_filename)
     
     # Ask about camera
     camera = raw_input('\nLeica, iPhone 6s, Nikon FM10, Nikon D70s, Bessa, or Other? (L/i/f/d/b/o): ')
@@ -97,9 +97,9 @@ if __name__ == "__main__":
     if len(street_tags) != 0:
         computed_tags += ', ' + ', '.join(street_tags)
     
-    print computed_tags
+    print(computed_tags)
     if date_string != '':
-        print 'Extracted date: ' + date_string
+        print('Extracted date: ' + date_string)
     
     # Ask for tags
     tags = []
@@ -129,15 +129,15 @@ if __name__ == "__main__":
         caption = caption + ' ' + date_string + '.'
     
     print
-    print 'Final tags are:\n' + ', '.join(tags)
-    print 'Instagram tags are:\n' + ', '.join(instagram_tags)
-    print 'Full caption is:\n' + caption.lstrip().rstrip()
+    print('Final tags are:\n' + ', '.join(tags))
+    print('Instagram tags are:\n' + ', '.join(instagram_tags))
+    print('Full caption is:\n' + caption.lstrip().rstrip())
     
     # Upload confirmation
     ok = raw_input('\nUpload? (Y/n): ')
     if len(ok) == 0 or ok[0].upper() == 'Y':
-        print "Uploading draft..."
+        print("Uploading draft...")
         output = client.create_photo(blog_name, state='draft', tags=tags, data=filenames, caption=caption)
         printjson(output)
     
-    print 'All drafts at: https://www.tumblr.com/blog/' + blog_name + '/drafts'
+    print('All drafts at: https://www.tumblr.com/blog/' + blog_name + '/drafts')

@@ -11,8 +11,8 @@ from PIL import Image
 import sys
 
 if len(sys.argv) != 4:
-    print "This script requires the following arguments:"
-    print "kaminsky.py <image_filename> <y-coordinate of selected pixels> <a/b: output image aspect ratio expressed as fraction>"
+    print("This script requires the following arguments:")
+    print("kaminsky.py <image_filename> <y-coordinate of selected pixels> <a/b: output image aspect ratio expressed as fraction>")
     exit(0)
 
 im = Image.open(sys.argv[1])
@@ -24,7 +24,7 @@ if len(fraction) == 2:
     numerator = int(fraction[0])
     denominator = int(fraction[1])
 else:
-    print "Aspect ratio is not in a valid format. Using default format of 16/9."
+    print("Aspect ratio is not in a valid format. Using default format of 16/9.")
     numerator = 16
     denominator = 9    
 
